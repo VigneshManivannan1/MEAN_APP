@@ -1,6 +1,6 @@
 # MEANAPP
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.8.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.8. This project is to showcase MEAN application where the end users can able to the CRUD of employees and save it in MangoDB
 
 ## Development server
 
