@@ -1,0 +1,48 @@
+<h1 *ngIf="isAddMode">Add Employee</h1>
+<h1 *ngIf="!isAddMode">Edit Employee</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+        <div class="form-group col-5">
+            <label>Employee ID</label>
+            <input type="text" formControlName="id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.id.errors }" />
+            <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
+                <div *ngIf="f.id.errors.required">Employee ID is required</div>
+            </div>
+        </div>
+        <div class="form-group col-5">
+            <label>Full Name</label>
+            <input type="text" formControlName="fullName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }" />
+            <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback">
+                <div *ngIf="f.fullName.errors.required">First Name is required</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-7">
+            <label>Email</label>
+            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email is required</div>
+                <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label>Role</label>
+            <select formControlName="role" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
+                <option value=""></option>
+                <option value="Employee">Employee</option>
+                <option value="Admin">Admin</option>
+            </select>
+            <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+                <div *ngIf="f.role.errors.required">Role is required</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Save
+        </button>
+        <a routerLink="/Employees" class="btn btn-link">Cancel</a>
+    </div>
+</form>
