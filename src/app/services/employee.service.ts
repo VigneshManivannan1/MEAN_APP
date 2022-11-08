@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 
 import { environment } from "../../environments/environment";
 
-const baseUrl = `${environment.apiUrl}/users`;
+const baseUrl = `${environment.apiUrl}/employee`;
 
 import { Employee } from "../employee/model/employee";
 
@@ -14,17 +14,18 @@ import { Employee } from "../employee/model/employee";
 export class employeeService {
 
   constructor(private http: HttpClient) {}
+  public listRecords:any;
 
   getAll() {
-    return this.http.get<Employee[]>(baseUrl);
+    return this.http.get<Employee[]>(`${environment.apiUrl}/employee`);
   }
 
   getById(id: string) {
-    return this.http.get<Employee>(`${baseUrl}/${id}`);
+    return this.http.get<Employee>(`${environment.apiUrl}/findemployee`);
   }
 
   create(params: any) {
-    return this.http.post(baseUrl, params);
+    return this.http.post<any>(`${environment.apiUrl}/createEmployee`, params);
   }
 
   update(id: string, params: any) {

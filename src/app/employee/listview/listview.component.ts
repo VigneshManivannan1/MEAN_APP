@@ -12,13 +12,12 @@ export class ListviewComponent implements OnInit {
 
   employee!: Employee[];
 
-  constructor(private employeeService: employeeService) {}
+  constructor(public employeeService: employeeService) {}
 
   ngOnInit() {
       this.employeeService.getAll()
-          .pipe(first())
-          .subscribe(employees => this.employee = employees);
-  }
+          .subscribe(employees => 
+            this.employeeService.listRecords = employees)}
 
   deleteemployee(id: string) {
       const user = this.employee.find(x => x.id === id);

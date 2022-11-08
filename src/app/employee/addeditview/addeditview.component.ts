@@ -30,18 +30,25 @@ export class AddeditviewComponent implements OnInit {
       
       const formOptions: AbstractControlOptions = { validators: null };
       this.form = this.formBuilder.group({
-          firstName: ['', Validators.required],
-          lastName: ['', Validators.required],
+          id: ['', Validators.required],
+          fullName: ['', Validators.required],
           email: ['', [Validators.required, Validators.email]],
           role: ['', Validators.required],
       }, formOptions);
 
       if (!this.isAddMode) {
-          this.employeeService.getById(this.id)
-              .pipe(first())
-              .subscribe(x => this.form.patchValue(x));
-      }
+            this.employeeService.listRecords.forEach((element: any) => {
+              if(element['id']==this.id){
+                this.form = this.formBuilder.group({
+                  id: element.id,
+                  fullName: element.fullName,
+                  email: element.email,
+                  role: element.role,
+              }, formOptions);
+              }
+            });
   }
+}
 
   // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
@@ -53,11 +60,11 @@ export class AddeditviewComponent implements OnInit {
       // this.alertService.clear();
 
       // stop here if form is invalid
-      console.log(this.form);
-      if (this.form.invalid) {
-        console.log("form invlaid" , this.form)
-          return;
-      }
+      // console.log(this.form);
+      // if (this.form.invalid) {
+      //   console.log("form invlaid" , this.form)
+      //     return;
+      // }
 
       this.loading = true;
       if (this.isAddMode) {
@@ -87,8 +94,5 @@ export class AddeditviewComponent implements OnInit {
           .add(() => this.loading = false);
   }
 
-}
-function MustMatch(arg0: string, arg1: string): import("@angular/forms").ValidatorFn | import("@angular/forms").ValidatorFn[] | null | undefined {
-  throw new Error('Function not implemented.');
 }
 

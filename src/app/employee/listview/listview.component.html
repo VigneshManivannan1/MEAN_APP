@@ -3,6 +3,7 @@
 <table class="table table-striped">
     <thead>
         <tr>
+            <th style="width: 30%">Employee ID</th>
             <th style="width: 30%">Name</th>
             <th style="width: 30%">Email</th>
             <th style="width: 30%">Role</th>
@@ -10,8 +11,9 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let employee of employee">
-            <td>{{employee.title}} {{employee.firstName}} {{employee.lastName}}</td>
+        <tr *ngFor="let employee of employeeService.listRecords">
+            <td>{{employee.id}}</td>
+            <td>{{employee.fullName}}</td>
             <td>{{employee.email}}</td>
             <td>{{employee.role}}</td>
             <td style="white-space: nowrap">
@@ -22,7 +24,7 @@
                 </button>
             </td>
         </tr>
-        <tr *ngIf="!employee">
+        <tr *ngIf="!employeeService.listRecords">
             <td colspan="4" class="text-center">
                 <span class="spinner-border spinner-border-lg align-center"></span>
             </td>
