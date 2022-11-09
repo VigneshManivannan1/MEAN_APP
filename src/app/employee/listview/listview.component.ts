@@ -29,6 +29,7 @@ export class ListviewComponent implements OnInit {
       .subscribe((response) => {
         if (response) {
           this.ngOnInit();
+          alert("Employee deleted form the database")
         }
       });
   }

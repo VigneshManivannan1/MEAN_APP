@@ -64,27 +64,28 @@ export class AddeditviewComponent implements OnInit {
 
       this.loading = true;
       if (this.isAddMode) {
-          this.createUser();
+          this.createEmployee();
       } else {
-          this.updateUser();
+          this.updateEmployee();
       }
   }
 
-  private createUser() {
+  private createEmployee() {
       this.employeeService.create(this.form.value)
           .subscribe(res => {
+            alert("Employee created successfully");
               this.router.navigate(['../'], { relativeTo: this.route });
           })
           .add(() => this.loading = false);
   }
 
-  private updateUser() {
+  private updateEmployee() {
       this.employeeService.update(this.form.value)
           .subscribe(() => {
+            alert("Employee record updated successfully");
               this.router.navigate(['../../'], { relativeTo: this.route });
           })
           .add(() => this.loading = false);
   }
-
 }
 
