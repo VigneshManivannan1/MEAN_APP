@@ -4,7 +4,7 @@
     <div class="form-row">
         <div class="form-group col-5">
             <label>Employee ID</label>
-            <input type="text" formControlName="id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.id.errors }" />
+            <input type="number" formControlName="id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.id.errors }" />
             <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
                 <div *ngIf="f.id.errors.required">Employee ID is required</div>
             </div>
