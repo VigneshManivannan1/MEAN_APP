@@ -20,12 +20,13 @@ export class ListviewComponent implements OnInit {
             this.employeeService.listRecords = employees)}
 
   deleteemployee(id: string) {
-      const user = this.employee.find(x => x.id === id);
-      if (!user) return;
-      user.isDeleting = true;
+    this.employee = this.employeeService.listRecords;
+      if (!id) return;
       this.employeeService.delete(id)
-          .pipe(first())
-          .subscribe(() => this.employee = this.employee.filter(x => x.id !== id));
+          .subscribe((response) => {
+          if(response){
+            this.ngOnInit();
+          }});
   }
 
 }
