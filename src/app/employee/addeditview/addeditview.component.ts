@@ -25,6 +25,7 @@ export class AddeditviewComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    //check id is present in route params
       this.id = this.route.snapshot.params['id'];
       this.isAddMode = !this.id;
       
@@ -50,19 +51,14 @@ export class AddeditviewComponent implements OnInit {
   }
 }
 
-  // convenience getter for easy access to form fields
+  // get attribute for form controls
   get f() { return this.form.controls; }
 
   onSubmit() {
       this.submitted = true;
 
-      // reset alerts on submit
-      // this.alertService.clear();
-
-      // stop here if form is invalid
-      // console.log(this.form);
+      // form validation check
       // if (this.form.invalid) {
-      //   console.log("form invlaid" , this.form)
       //     return;
       // }
 

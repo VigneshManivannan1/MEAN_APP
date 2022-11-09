@@ -12,21 +12,25 @@ export class ListviewComponent implements OnInit {
 
   employee!: Employee[];
 
-  constructor(public employeeService: employeeService) {}
+  constructor(public employeeService: employeeService) { }
 
   ngOnInit() {
-      this.employeeService.getAll()
-          .subscribe(employees => 
-            this.employeeService.listRecords = employees)}
+    //api call to get all the employee records
+    this.employeeService.getAll()
+      .subscribe(employees =>
+        this.employeeService.listRecords = employees)
+  }
 
   deleteemployee(id: string) {
     this.employee = this.employeeService.listRecords;
-      if (!id) return;
-      this.employeeService.delete(id)
-          .subscribe((response) => {
-          if(response){
-            this.ngOnInit();
-          }});
+    if (!id) return;
+    //api call to delete particular id
+    this.employeeService.delete(id)
+      .subscribe((response) => {
+        if (response) {
+          this.ngOnInit();
+        }
+      });
   }
 
 }
