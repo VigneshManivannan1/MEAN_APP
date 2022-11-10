@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import * as jwt_decode from 'jwt-decode';
+import {employeeService} from '../services/employee.service'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     public authService:AuthService,
+    public employeeService : employeeService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -39,8 +41,11 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.f.username.value, this.f.password.value)
         .subscribe(
             data => {
-              localStorage.setItem('currentUser',this.f.username.value);
+              localStorage.setItem('currentUser',data['username']);
               this.loading = false;
+              if(data['role']=="Admin"){
+                this.employeeService.isAdmin = true;
+              }
               this.authService.isLoggedIn = true;
                 this.router.navigate(['/home']);
             },

@@ -4,7 +4,8 @@ const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser")
-
+const jwt = require('jsonwebtoken');
+require("dotenv").config();
 
 var app = express();
 var PORT = 3000;
@@ -145,11 +146,32 @@ router.post("/createEmployee",  function (req, res) {
    //auth employee
 
    router.post("/authEmployee",  function (req, res) {
-    console.log("test");
     connection((db) => {
             var dbo = db.db("authEmployee");
             var data = req.body
-            res.json("Login successful");
+            dbo.collection('auth')
+            .find({username:data['username']})
+            .toArray()
+            .then((employees) => {
+                var dataresponse = {
+                    role: employees[0]['role'],
+                    username: employees[0]['username']
+                }
+                if(employees[0]['password'] == data['password']){
+                    //random Secret  key
+                    // let jwtSecretKey = "123";
+
+                    // const token = jwt.sign( dataresponse,jwtSecretKey);
+                    console.log(dataresponse)
+                    res.status(200).json(dataresponse);
+                }
+                else{
+                    res.status(501).json("password mismatched");
+                }
+            })
+            .catch((err) => {
+                sendError(err, res);
+            });
     });
    });
 

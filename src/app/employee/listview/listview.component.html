@@ -19,7 +19,7 @@
             <td>{{employee.fullName}}</td>
             <td>{{employee.email}}</td>
             <td>{{employee.role}}</td>
-            <td style="white-space: nowrap">
+            <td style="white-space: nowrap" *ngIf="employeeService.isAdmin">
                 <a routerLink="edit/{{employee.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
                 <button (click)="deleteemployee(employee.id)" class="btn btn-sm btn-danger btn-delete-employee" [disabled]="employee.isDeleting">
                     <span *ngIf="employee.isDeleting" class="spinner-border spinner-border-sm"></span>

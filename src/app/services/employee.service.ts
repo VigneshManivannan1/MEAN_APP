@@ -15,6 +15,7 @@ export class employeeService {
 
   constructor(private http: HttpClient) { }
   public listRecords: any;
+  public isAdmin = false;
 
 
   getAll() {

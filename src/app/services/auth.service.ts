@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
@@ -17,7 +18,6 @@ export class AuthService {
     this.currentUserSubject = new BehaviorSubject<any>('');
     this.currentUser = this.currentUserSubject.asObservable();
   }
-
   public get currentUserValue(): any {
     return this.currentUserSubject.value;
   }
@@ -30,6 +30,12 @@ export class AuthService {
     .set('username', username)
     .set('password', password);
     return this.http.post<any>(`${environment.apiUrl}/authEmployee`, params, { headers: httpHeaders })
+  }
+
+  getUserDetail(){
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'  });
+    return this.http.get<any>(`${environment.apiUrl}/authEmployee`, { headers: httpHeaders })
   }
 
   logout() {
@@ -46,8 +52,11 @@ export class AuthService {
     const params = new HttpParams()
     .set('username', value.username)
     .set('password', value.password)
-    .set('fullname', value.fullName);
+    .set('fullname', value.fullName)
+    .set('role', value.role);
     return this.http.post<any>(`${environment.apiUrl}/registerEmployee`, params, { headers: httpHeaders })
   }
+
+
 
 }
