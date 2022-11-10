@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'MEAN_APP';
+  currentUser = '';
+  isLoggedIn = false;
+  constructor(public authService:AuthService){
+
+  }
+
+  ngOnit(){
+    this.isLoggedIn = this.authService.isLoggedIn;
+    //this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  }
 }

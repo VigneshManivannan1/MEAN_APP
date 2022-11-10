@@ -2,9 +2,9 @@
 <h1 *ngIf="!isAddMode">Edit Employee</h1>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-row">
-        <div class="form-group col-5">
+        <div class="form-group col-5" >
             <label>Employee ID</label>
-            <input type="number" formControlName="id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.id.errors }" />
+            <input type="number" formControlName="id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.id.errors }"/>
             <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
                 <div *ngIf="f.id.errors.required">Employee ID is required</div>
             </div>
@@ -43,6 +43,6 @@
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
             Save
         </button>
-        <a routerLink="/Employees" class="btn btn-link">Cancel</a>
+        <a routerLink="" class="btn btn-link">Cancel</a>
     </div>
 </form>

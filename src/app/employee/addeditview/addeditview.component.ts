@@ -61,12 +61,14 @@ export class AddeditviewComponent implements OnInit {
     if (this.form.invalid) {
         return;
     }
+    if (this.isAddMode) {
     this.employeeService.listRecords.forEach((element: any) => {
       if (element['id'] == this.form.value["id"]) {
         alert("Employee ID " + element['id'] +  " is already present in the database. Please enter unique Employee ID")
         this.submitted = false;
       }
     });
+  }
     if (!this.submitted)
       return;
     this.loading = true;

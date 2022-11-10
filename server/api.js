@@ -142,6 +142,33 @@ router.post("/createEmployee",  function (req, res) {
     });
    });
 
+   //auth employee
+
+   router.post("/authEmployee",  function (req, res) {
+    console.log("test");
+    connection((db) => {
+            var dbo = db.db("authEmployee");
+            var data = req.body
+            res.json("Login successful");
+    });
+   });
+
+   router.post("/registerEmployee",  function (req, res) {
+    var error = false;
+    connection((db) => {
+        var dbo = db.db("authEmployee");
+        var data = req.body
+        dbo.collection('auth')
+            .insertOne(data)
+            .then(() => {
+                res.json("success");
+            })
+            .catch((err) => {
+                sendError(err, res);
+            });
+    });
+   });
+
 
 // update employees
 router.put('/updateEmployee', (req, res) => {
