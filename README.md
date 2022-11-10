@@ -6,7 +6,7 @@ Created a full-fledged working application with below :
 3. Database  - MongoDB
 
 Features:
-Login – This page will have feature for end user to login with username and password and this cridentails will be validated with database record. Note: JWT is not implemented as we can’t decode the token using open source. However, add the code for implemented JWT token.
+Login – This page will have feature for end user to login with username and password and this credential will be validated with database record. Note: JWT is not implemented as we can’t decode the token using open source. However, add the code for implemented JWT token.
 Register new user – Here the end user will be an option to add the user for login with admin privilege 
 Dashboard – Login username , role details
 Details screen – Here all the records will be displayed in table 
