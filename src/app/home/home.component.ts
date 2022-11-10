@@ -8,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   constructor() { }
-
+  username:any;
+  role:any;
   ngOnInit(): void {
+    this.username = localStorage.getItem('currentUser');
+    this.role = localStorage.getItem('role');
   }
 
 }

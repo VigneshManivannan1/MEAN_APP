@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   loading = false;
   submitted = false;
-  error = '';
+  error = false;
 
   constructor(private formBuilder: FormBuilder,
     public authService:AuthService,
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
+    this.error = false;
     // stop here if form is invalid
     if (this.loginForm.invalid) {
         return;
@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
         .subscribe(
             data => {
               localStorage.setItem('currentUser',data['username']);
+              localStorage.setItem('role',data['role']);
               this.loading = false;
               if(data['role']=="Admin"){
                 this.employeeService.isAdmin = true;
@@ -50,7 +51,7 @@ export class LoginComponent implements OnInit {
                 this.router.navigate(['/home']);
             },
             error => {
-                this.error = error;
+                this.error = true;
                 this.loading = false;
             });
 

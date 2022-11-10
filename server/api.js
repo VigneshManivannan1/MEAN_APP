@@ -168,6 +168,7 @@ router.post("/createEmployee",  function (req, res) {
                 else{
                     res.status(501).json("password mismatched");
                 }
+                //res.status(501).json("password mismatched");
             })
             .catch((err) => {
                 sendError(err, res);

@@ -4,6 +4,9 @@
     <a class="nav-item nav-link" routerLink="/" routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }">Home</a>
     <a class="nav-item nav-link" routerLink="/employee" routerLinkActive="active">Employee</a>
+    <div style="position: relative;margin-left: 480%;">
+      <a class="nav-item nav-link" routerLink="" (click)="authService.logout()" >Logout</a>
+    </div>
   </div>
 </nav>
 

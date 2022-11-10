@@ -1,5 +1,8 @@
+
+
 <div class="col-md-6 offset-md-3 mt-5" *ngIf="!authService.isLoggedIn">
     <div class="card">
+        
         <h4 class="card-header">Login</h4>
         <div class="card-body">
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -17,6 +20,7 @@
                         <div *ngIf="f.password.errors.required">Password is required</div>
                     </div>
                 </div>
+                <p style="color: red; align-items: center;" *ngIf="error">Username or password is incorrect</p>
                 <button [disabled]="loading" class="btn btn-primary">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     Login
