@@ -32,6 +32,15 @@ export class AuthService {
     return this.http.post<any>(`${environment.apiUrl}/authEmployee`, params, { headers: httpHeaders })
   }
 
+  verifyToken(token:string) {
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' ,
+      'x-access-token':token
+  });
+
+    return this.http.post<any>(`${environment.apiUrl}/verifyToken`,'' ,{ headers: httpHeaders })
+  }
+
   getUserDetail(){
     const httpHeaders = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'  });
@@ -41,6 +50,8 @@ export class AuthService {
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem("currentUser");
+    localStorage.removeItem('role');
+    localStorage.removeItem('token');
     this.currentUserSubject.next('');
     this.isLoggedIn = false;
   }

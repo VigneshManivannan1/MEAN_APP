@@ -19,6 +19,7 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-Access-Token");
     next();
 });
 app.use(router);
@@ -106,11 +107,11 @@ router.post("/authEmployee", function (req, res) {
                 }
                 if (employees[0]['password'] == data['password']) {
                     //random Secret  key
-                    // let jwtSecretKey = "123";
+                    let jwtSecretKey = "123";
 
-                    // const token = jwt.sign( dataresponse,jwtSecretKey);
+                    const token = jwt.sign( dataresponse,jwtSecretKey);
                     console.log(dataresponse)
-                    res.status(200).json(dataresponse);
+                    res.status(200).json(token);
                 }
                 else {
                     res.status(501).json("password mismatched");
@@ -137,6 +138,27 @@ router.post("/registerEmployee", function (req, res) {
                 sendError(err, res);
             });
     });
+});
+
+router.post("/verifyToken", function (req, res) {
+    connection((db) => {
+    const token =
+    req.body.token || req.query.token || req.headers["x-access-token"];
+
+    console.log(req.headers);
+    console.log(req)
+    if (!token) {
+        return res.status(403).send("A token is required for authentication");
+      }
+      try {
+        const decoded = jwt.verify(token, '123');
+        console.log(decoded)
+        res.status(200).json(decoded);
+      } catch (err) {
+        return res.status(401).send("Invalid Token");
+      }
+    });
+
 });
 
 

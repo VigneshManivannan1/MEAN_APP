@@ -40,21 +40,35 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authService.login(this.f.username.value, this.f.password.value)
         .subscribe(
-            data => {
-              localStorage.setItem('currentUser',data['username']);
-              localStorage.setItem('role',data['role']);
-              this.loading = false;
-              if(data['role']=="Admin"){
-                this.employeeService.isAdmin = true;
-              }
-              this.authService.isLoggedIn = true;
-                this.router.navigate(['/home']);
+            async data => {
+              localStorage.setItem('token',data);
+              await this.verifyToken(data);
             },
             error => {
                 this.error = true;
                 this.loading = false;
             });
 
+  }
+
+  verifyToken(data: string) {
+    this.authService.verifyToken(data)
+      .subscribe(
+        data => {
+
+          localStorage.setItem('currentUser', data['username']);
+          localStorage.setItem('role', data['role']);
+          this.loading = false;
+          if (data['role'] == "Admin") {
+            this.employeeService.isAdmin = true;
+          }
+          this.authService.isLoggedIn = true;
+          this.router.navigate(['/home']);
+        },
+        error => {
+          this.error = true;
+          this.loading = false;
+        });
   }
 
 }
