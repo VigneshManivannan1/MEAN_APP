@@ -16,4 +16,19 @@ describe('AuthService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+  it('function call currentUserValue', () => {
+    expect(service.currentUserValue).toEqual('');
+  });
+  it('function call login', () => {
+    expect(service.login('test','test')).toBeTruthy();
+  });
+  it('function call getUserDetail', () => {
+    expect(service.getUserDetail()).toBeTruthy();
+  });
+  it('function call logout', () => {
+    expect(service.logout()).toBeUndefined();
+  });
+  it('function call register', () => {
+    expect(service.register([])).toBeTruthy();
+  });
 });

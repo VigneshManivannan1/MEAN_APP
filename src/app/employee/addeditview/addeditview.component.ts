@@ -79,7 +79,7 @@ export class AddeditviewComponent implements OnInit {
     }
   }
 
-  private createEmployee() {
+  public createEmployee() {
     this.employeeService.create(this.form.value)
       .subscribe(res => {
         alert("Employee created successfully");
@@ -88,7 +88,7 @@ export class AddeditviewComponent implements OnInit {
       .add(() => this.loading = false);
   }
 
-  private updateEmployee() {
+  public updateEmployee() {
     this.employeeService.update(this.form.value)
       .subscribe(() => {
         alert("Employee record updated successfully");

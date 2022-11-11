@@ -16,4 +16,16 @@ describe('EmployeeService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+  it('function call getById', () => {
+    expect(service.getById('')).toBeTruthy();
+  });
+  it('function call create', () => {
+    expect(service.create([])).toBeTruthy();
+  });
+  it('function call update', () => {
+    expect(service.update([])).toBeTruthy();
+  });
+  it('function call delete', () => {
+    expect(service.delete('')).toBeTruthy();
+  });
 });

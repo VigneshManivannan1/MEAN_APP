@@ -25,4 +25,12 @@ describe('RegisterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('function call f', () => {
+    expect(component.f).toBeTruthy();
+  });
+
+  it('function call onsubmit', () => {
+    component.onSubmit();
+    expect(component.submitted).toBeTruthy();
+  });
 });

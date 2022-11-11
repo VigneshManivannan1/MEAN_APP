@@ -22,4 +22,7 @@ describe('ListviewComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should create deleteemployee', () => {
+    expect(component.deleteemployee('1')).toBeUndefined();
+  });
 });
